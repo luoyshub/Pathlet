@@ -3,7 +3,7 @@ import pickle
 import sys
 
 from base import *
-# from sets import Set
+from sets import Set
 
 
 def sqDist(pt1, pt2):
@@ -77,7 +77,7 @@ def frechetDec(trajA, trajB, delta):
     """
     
     ptQueue = [(0, 0)]
-    visited = set([])
+    visited = Set([])
     while len(ptQueue) > 0:
         current = ptQueue.pop(0)
         if current in visited:

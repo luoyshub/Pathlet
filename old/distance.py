@@ -1,4 +1,4 @@
-import pickle as pickle
+# import cPickle as pickle
 import numpy as np
 import sys
 
@@ -47,10 +47,11 @@ def findNeighboringPts(grid, point):
         for j in range(-1, 2):
             if 0 <= xCell + i < grid.xCells and 0 <= yCell + j < grid.yCells: # Boundary check
                 # If there are no pts in the cell it won't be in data dictionary.
+                # if grid.data.has_key((xCell+i, yCell+j)):
                 if (xCell+i, yCell+j) in grid.data:
                     for trajID in grid.data[(xCell+i, yCell+j)]:
                         # If this is the first time you're adding points from this trajectory.
-                        if (trajID in possibleTrajs) is False:
+                        if trajID in possibleTrajs is False:
                             possibleTrajs[trajID] = []
                         possibleTrajs[trajID].extend(grid.data[(xCell+i, yCell+j)][trajID])
     return possibleTrajs
@@ -111,7 +112,7 @@ def computeDistances(trajs, simpTraj, pth, r, possStarts, possEnds, upth, pathDi
                 break
                 
             # If (upth, straj) is already present in pathDic, do not add it.
-            if ((upth, subTraj(simpTraj.trajID, (possStarts[i], possEnds[j]))) in pathDic) is True:
+            if (upth, subTraj(simpTraj.trajID, (possStarts[i], possEnds[j]))) in pathDic is True:
                 curBound = possEnds[j]
                 break
       
@@ -192,7 +193,7 @@ def process(trajs, rmin, rmax):
 
             # Record distance between pathlet and itself to be 0.
             pairedTraj = subTraj(pth.trajID, pth.bounds)
-            if ((pth, pairedTraj) in pathDic) is False:
+            if (pth, pairedTraj) in pathDic is False:
                 pathDic[(pth, pairedTraj)] = 0
                 
             # Compute distance between forwardPathlet and possibleFSubTrajs.
@@ -211,7 +212,7 @@ def process(trajs, rmin, rmax):
 
 if __name__ == "__main__":
     if len(sys.argv) != 4:
-        print("Wrong command. See README for more details.")
+        print ("Wrong command. See README for more details.")
         
     else:    
         trajs = pickle.load(open(sys.argv[1] + ".CleanedUp.p", "rb"))

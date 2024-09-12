@@ -103,7 +103,7 @@ def canonise(i,j):
         return []
     retval = []
     retval.append((i, j))
-    midpoint = (i + j)//2
+    midpoint = (i + j)/2
     retval.extend(canonise(i, midpoint))
     retval.extend(canonise(midpoint + 1, j))
     return retval
@@ -111,4 +111,4 @@ def canonise(i,j):
 
 # test canonise function
 if __name__ == "__main__":
-    print(canonise(0, 16))
+    print( canonise(0, 16))
